@@ -11,11 +11,13 @@ interface Opts<T = any> {
    * @default 'data'
    */
   dataKey?: string;
+  defaultData?: T
+  useAuth?: boolean;
 }
 
 export default function useGet<T>(url: string, opts: Opts<T> = {}) {
-  const { fetcher, dataKey, onMount = true } = opts;
-  const [data, setData] = useState<T | null | undefined>(null);
+  const { fetcher, dataKey, defaultData, onMount = true } = opts;
+  const [data, setData] = useState<T | null | undefined>(defaultData);
   const { isLoading, mutate, error } = useSWR(
     url,
     async (url) => {

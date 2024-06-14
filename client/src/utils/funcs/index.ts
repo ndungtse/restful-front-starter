@@ -1,5 +1,7 @@
 import { BiCheckCircle, BiX } from 'react-icons/bi';
 import { FaClock } from 'react-icons/fa6';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 /**
  * function that takes a key string like 'name' or 'name.first' and returns a function that takes an object and returns the value of the key in the object
@@ -49,4 +51,31 @@ export const getStatusMeta = (status: string) => {
       default:
          return { color: '#CDCDCD' };
    }
+};
+
+export const decodeToken = (_token?: string) => {
+   let data: any = null;
+   try {
+      const token = _token ?? Cookies.get('token');
+      if (!token) {
+         return data;
+      }
+      const decoded = jwtDecode(token.toString());
+      data = decoded;
+   } catch (error) {
+      console.error('Error decoding token', error);
+   }
+   return data;
+};
+
+/**
+ * @param str
+ * @returns a capitalize string ex: 'HELLO_WORLD' => 'Hello World'
+ */
+export const capitalize = (str: string): string => {
+   if (!str) return '';
+   return str
+      ?.split('_')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
 };

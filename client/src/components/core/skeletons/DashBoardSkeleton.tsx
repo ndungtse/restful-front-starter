@@ -1,5 +1,10 @@
 import { Flex, Skeleton } from '@mantine/core';
 
+/**
+ * Renders a skeleton component for the dashboard.
+ *
+ * @return {JSX.Element} The skeleton component for the dashboard.
+ */
 const DashBoardSkeleton = () => {
    return (
       <div className="flex w-full gap-6 flex-col">

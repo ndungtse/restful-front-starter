@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import './index.css'
 import { RecoilRoot } from 'recoil';
 import AppProvider from './contexts/AppProvider.tsx';
+import AuthProvider from './contexts/AuthProvider.tsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <RecoilRoot>
         <AppProvider>
           <Suspense fallback={<div className=" h-screen flex items-center justify-center w-full">Loading...</div>}>
-            <App />
+            <AuthProvider>
+              <App />
+            </AuthProvider>
           </Suspense>
         </AppProvider>
       </RecoilRoot>
