@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom
 import Login from './pages/auth/login';
 import Register from './pages/auth/register';
 import { useAuth } from './contexts/AuthProvider';
+import NotFound from './pages/not-found';
 // import HomePage from './pages'
 const HomePage = lazy(() => import('./pages'))
 
@@ -23,6 +24,7 @@ function App() {
         <Route element={<ProtectedRoutes />}>
           <Route path='/' element={<HomePage />} />
         </Route>
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )
