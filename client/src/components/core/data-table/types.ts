@@ -40,7 +40,7 @@ export interface TableContext<T = any> {
 
 export interface IPagination {
    page: number;
-   perPage: number;
+   limit: number;
    total: number;
-   onChange: (page: number) => void;
+   onChange?: (page: number) => void;
 }

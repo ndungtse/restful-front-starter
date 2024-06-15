@@ -1,7 +1,8 @@
 import { getObjValue } from '@/utils/funcs';
 import { Button, Checkbox, Input, Table, TableProps } from '@mantine/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GoPlus } from 'react-icons/go';
+import PaginationComponent from './pagination';
 import { CellContext, Column, IPagination, RowContext, TableContext } from './types';
 
 export interface DataTableProps {
@@ -33,9 +34,10 @@ const DataTable = (props: DataTableProps) => {
       buttonText,
       onPress,
    } = props;
+   const [_data, setData] = React.useState(data);
    const [globalFilter, setGlobalFilter] = React.useState('');
    const [selectedRows, setSelectedRows] = React.useState<RowContext[]>([]);
-   // const [currentPage, setCurrentPage] = React.useState(1);
+
 
    const toggleRow = (row: RowContext) => {
       // console.log('---row---', row);
@@ -57,11 +59,14 @@ const DataTable = (props: DataTableProps) => {
 
    const getSelectedRows = () => selectedRows.map((r) => r.data);
 
-   const filteredData = data.filter((row) => {
-      return Object.values(row).some((value) => {
-         return String(value).toLowerCase().includes(globalFilter.toLowerCase());
+   useEffect(() => {
+      const filteredData = data.filter((row) => {
+         return Object.values(row).some((value) => {
+            return String(value).toLowerCase().includes(globalFilter.toLowerCase());
+         });
       });
-   });
+      setData(filteredData);
+   }, [data, globalFilter]);
 
    const tableContext: TableContext = {
       setGlobalFilter,
@@ -121,7 +126,7 @@ const DataTable = (props: DataTableProps) => {
                   </Table.Tr>
                </Table.Thead>
                <Table.Tbody>
-                  {filteredData.map((row, rowIndex) => (
+                  {_data.map((row, rowIndex) => (
                      <Table.Tr key={rowIndex}>
                         <Table.Td align="center">
                            <Checkbox
@@ -149,7 +154,7 @@ const DataTable = (props: DataTableProps) => {
                         })}
                      </Table.Tr>
                   ))}
-                  {filteredData.length === 0 && (
+                  {_data.length === 0 && (
                      <Table.Tr>
                         <Table.Td colSpan={columns.length + 1}>No data found</Table.Td>
                      </Table.Tr>
@@ -157,13 +162,7 @@ const DataTable = (props: DataTableProps) => {
                </Table.Tbody>
             </Table>
          </div>
-         {paginate && pagination && (
-            <div>
-               {/* {paginationPosition === 'top' && <PaginationComponent pagination={pagination} />}
-               <PaginationComponent pagination={pagination} />
-               {paginationPosition === 'bottom' && <PaginationComponent pagination={pagination} />} */}
-            </div>
-         )}
+         {paginate && <PaginationComponent pagination={pagination} setData={setData} data={data} />}
       </div>
    );
 };

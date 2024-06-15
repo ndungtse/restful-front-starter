@@ -4,6 +4,8 @@ import Login from './pages/auth/login';
 import Register from './pages/auth/register';
 import { useAuth } from './contexts/AuthProvider';
 import NotFound from './pages/not-found';
+import DashboardLayout from './layouts/dashboard-layout';
+import DashBoardIndex from './pages/dashboard';
 // import HomePage from './pages'
 const HomePage = lazy(() => import('./pages'))
 
@@ -23,6 +25,10 @@ function App() {
         {/* Protected Routes */}
         <Route element={<ProtectedRoutes />}>
           <Route path='/' element={<HomePage />} />
+        </Route>
+        {/* Dashboard */}
+        <Route element={<DashboardLayout />}>
+          <Route path='/dashboard' element={<DashBoardIndex />} />
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
