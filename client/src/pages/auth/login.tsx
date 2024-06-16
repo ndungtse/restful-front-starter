@@ -19,10 +19,14 @@ const Login = () => {
 
   const onSubmit = async (values: typeof form.values) => {
     console.log(values)
-    setCookie('token', 'token', {
-      expires: 24 * 60 * 60 * 1000
-    });
-    window.location.href = '/dashboard'
+    try {
+      setCookie('token', 'token', {
+        expires: 24 * 60 * 60 * 1000
+      });
+      window.location.href = '/dashboard'
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

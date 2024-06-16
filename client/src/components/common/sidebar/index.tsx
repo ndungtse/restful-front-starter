@@ -1,53 +1,31 @@
-import { cn } from '@/utils/cn';
-import { Menu } from '@mantine/core';
+import { showSidebarState } from '@/utils/atoms';
+import { ActionIcon, Drawer } from '@mantine/core';
 import { FC } from 'react';
-import { BiChevronUp, BiLayout, BiLogOutCircle } from 'react-icons/bi';
-import { Link, useLocation } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import NavbarItems from './navbar-items';
+import { BiX } from 'react-icons/bi';
 
 interface SideBarProps {
    eRoutes?: any[];
 }
 
-const sidebarRoutes = [
-   {
-      name: 'Dashboard',
-      path: '/dashboard',
-      icon: BiLayout,
-   },
-]
+const Sidebar: FC<SideBarProps> = () => {
+   const [opened, setOpened] = useRecoilState(showSidebarState);
 
-const Sidebar: FC<SideBarProps> = ({ eRoutes }) => {
-   const location = useLocation();
-
-
-   const isActiveLink = (linkPath: string, index: number) => {
-      if (index === 0) return location.pathname === linkPath;
-      console.log(location.pathname, linkPath);
-      return location.pathname.startsWith(linkPath);
-   };
+   const close = () => setOpened(false);
 
    return (
       <>
-         <div className="bg-white border-r  min-w-[230px] rounded-2xl py-4 flex flex-col">
-            <Link to={'/'} className="p-8">
-               {/* <Logo withText={false} /> */}
-               <h1 className=' font-bold text-4xl'>RestFull</h1>
-            </Link>
-            {sidebarRoutes?.map((route, i) => (
-               <Link to={route.path} className={cn(" w-full flex items-center", isActiveLink(route.path, i) ? "text-primary" : " text-stone-800")}>
-                  <div className={cn("h-full w-2 rounded-r-lg", isActiveLink(route.path, i) ? "bg-primary" : "bg-transparent")}></div>
-                  <div className=" px-8 py-2 flex items-center gap-x-4">
-                     <route.icon size={25} />
-                     <p className="whitespace-nowrap">{route.name}</p>
-                  </div>
-               </Link>
-            ))}
-            <button className="flex mt-auto flex-row text-primary gap-x-2  justify-center">
-               <BiLogOutCircle size={24} />
-               <p>Logout</p>
-            </button>
+         <Drawer classNames={{ body: 'h-full flex flex-col relative' }} opened={opened} onClose={close} size="xs" withCloseButton={false}>
+            <ActionIcon variant='light' className="!absolute top-2 right-2" onClick={close}>
+               <BiX size={30} />
+            </ActionIcon>
+            <NavbarItems />
+            {/* </div> */}
+         </Drawer>
+         <div className="bg-white border-r  lg:min-w-[230px] min-w-full rounded-2xl py-4 lg:flex hidden flex-col">
+            <NavbarItems />
          </div>
-         {/* </div> */}
       </>
    );
 };
