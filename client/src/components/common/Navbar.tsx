@@ -12,7 +12,7 @@ function Navbar() {
    const openSidebar = () => setShowSidebar(true);
 
    return (
-      <div className="flex gap-x-3 w-full p-3 px-6 bg-white items-center justify-between border-b">
+      <div className="flex sticky z-10 top-0 gap-x-3 w-full p-3 px-6 bg-white items-center justify-between border-b">
          <div className="flex items-center gap-x-3">
             {<ActionIcon onClick={openSidebar} className='lg:!hidden' variant='transparent'>
                <BiSidebar className=' text-black' size={30} />

@@ -1,10 +1,9 @@
-import { CgCreditCard } from 'react-icons/cg';
-import { IStatsCardProps } from '../types';
+import { IStatsCardProps } from '@/utils/types';
 
-interface Props extends IStatsCardProps {}
+interface Props extends IStatsCardProps { }
 
-const StatCard = ({ title, value: price, subtitle, color }: Props) => {
-   if (!title && !price) return null;
+const StatCard = ({ title, value, color }: Props) => {
+
    return (
       <div className="px-4 py-4 rounded-xl shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] bg-white ">
          <div className="flex flex-row gap-2 ">
@@ -30,7 +29,7 @@ const StatCard = ({ title, value: price, subtitle, color }: Props) => {
                         color: color,
                      }}
                   >
-                     {String(price).toLocaleString()}
+                     {String(value).toLocaleString()}
                   </span>
                </div>
             </div>

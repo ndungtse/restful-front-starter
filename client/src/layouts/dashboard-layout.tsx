@@ -6,7 +6,7 @@ import Navbar from '../components/common/Navbar';
 
 export default function DashboardLayout({ routes }: { routes?: any[] }) {
    return (
-      <div className={'w-full h-screen flex flex-row bg-light'}>
+      <div className={'w-full h-screen overflow-y-auto flex flex-row bg-light'}>
          <Sidebar eRoutes={routes} />
          <div className=" flex flex-col w-full">
             <Navbar />

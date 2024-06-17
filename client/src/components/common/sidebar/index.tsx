@@ -23,7 +23,7 @@ const Sidebar: FC<SideBarProps> = () => {
             <NavbarItems />
             {/* </div> */}
          </Drawer>
-         <div className="bg-white border-r  lg:min-w-[230px] min-w-full rounded-2xl py-4 lg:flex hidden flex-col">
+         <div className="bg-white border-r sticky top-0  lg:min-w-[230px] min-w-full rounded-2xl py-4 lg:flex hidden flex-col">
             <NavbarItems />
          </div>
       </>
