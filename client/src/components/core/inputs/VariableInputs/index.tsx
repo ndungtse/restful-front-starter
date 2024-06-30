@@ -1,8 +1,8 @@
 import React, { Children } from 'react';
 import VarInput from './VarInput';
-import { cn } from '@/lib/utils/cn';
 import { ActionIcon, Button } from '@mantine/core';
 import { BiMinus } from 'react-icons/bi';
+import { cn } from '@/utils/cn';
 
 interface Props<T> {
    children: React.ReactNode;
@@ -54,11 +54,11 @@ function VariableInputs<T = any>(props: Props<T>) {
                   {varInputs.map((input, index) => {
                      const inputData = r;
                      const onChange = (value: any) => {
-                        window.log('value', value);
+                        // window.log('value', value);
                         const newData = JSON.parse(JSON.stringify(inputRows)) as typeof inputRows;
                         newData[i] = value;
-                        window.log('newData', newData);
-                        window.log('oldData', inputRows);
+                        // window.log('newData', newData);
+                        // window.log('oldData', inputRows);
                         setInputsRows(newData);
                      };
                      return (

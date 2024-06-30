@@ -4,6 +4,7 @@ import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import '@mantine/dates/styles.css';
 import { Notifications } from '@mantine/notifications';
+import MainSpotLight from '@/components/common/spotlight';
 
 interface Props {
    children: React.ReactNode;
@@ -46,6 +47,7 @@ const AppProvider = ({ children }: Props) => {
          }}
          defaultColorScheme="light"
       >
+         <MainSpotLight />
          <Notifications position="top-right" />
          {children}
       </MantineProvider>
